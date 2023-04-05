@@ -17,9 +17,7 @@
 					event.preventDefault();
 
 					const $table = $( '.ernest-dashboard__content' );
-					const $updateDataButton = $( '#ernest-update-data-button' );
 
-					$updateDataButton.addClass( 'ernest-loading' );
 					$table.addClass( 'ernest-loading' );
 
 					$.ajax( {
@@ -30,7 +28,6 @@
 							security: ernestConfig.adminUpdateDataNonce,
 						},
 						success: ( response ) => {
-							$updateDataButton.removeClass( 'ernest-loading' );
 							$table.removeClass( 'ernest-loading' );
 
 							if ( response.success && response.data ) {
@@ -38,7 +35,6 @@
 							}
 						},
 						error: ( xhr, status, error ) => {
-							$updateDataButton.removeClass( 'ernest-loading' );
 							$table.removeClass( 'ernest-loading' );
 
 							console.error( `Error: ${status} - ${error}` );
