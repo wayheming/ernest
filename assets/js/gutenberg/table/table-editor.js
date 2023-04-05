@@ -97,7 +97,7 @@ registerBlockType( 'ernest/table', {
 
 		useEffect( () => {
 			fetchData();
-		}, [id, fname, lname, email, date] );
+		}, [] );
 
 		return (
 			<div className="wp-block-table">

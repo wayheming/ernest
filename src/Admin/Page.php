@@ -63,7 +63,7 @@ class Page {
 	 *
 	 * @return bool
 	 */
-	public function is_admin_page(): bool {
+	private function is_admin_page(): bool {
 		$current_page = isset( $_GET['page'] ) ? sanitize_key( $_GET['page'] ) : '';
 
 		return is_admin() && $current_page === self::SLUG;
@@ -106,7 +106,7 @@ class Page {
 	 *
 	 * @return array|WP_Error
 	 */
-	public function get_api_data( string $data_type ): WP_Error|array {
+	private function get_api_data( string $data_type ): WP_Error|array {
 		$data = '';
 
 		switch ( $data_type ) {

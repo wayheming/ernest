@@ -40,7 +40,7 @@ final class Plugin {
 	/**
 	 * Load other classes.
 	 */
-	public function loader(): void {
+	private function loader(): void {
 		new Admin();
 		new Cli();
 		new Table();

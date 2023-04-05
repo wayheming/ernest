@@ -29,7 +29,7 @@ class Cli {
 	 * Register command.
 	 * @throws Exception
 	 */
-	public function register_command(): void {
+	private function register_command(): void {
 		WP_CLI::add_command( 'update_api_data', [ $this, 'update_api_data' ] );
 	}
 

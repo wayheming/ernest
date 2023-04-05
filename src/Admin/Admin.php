@@ -72,7 +72,7 @@ class Admin {
 	 *
 	 * @return array Localized data.
 	 */
-	public function get_localized_data(): array {
+	private function get_localized_data(): array {
 		return [
 			'adminAjaxUrl'         => admin_url( 'admin-ajax.php' ),
 			'adminUpdateDataNonce' => wp_create_nonce( 'ernest_admin_update_table_nonce' ),

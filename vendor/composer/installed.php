@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => '__root__',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '6d94f1180e26f53fe05093148ec8ef32f846d3f4',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '6d94f1180e26f53fe05093148ec8ef32f846d3f4',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -56,9 +56,9 @@
             'dev_requirement' => false,
         ),
         'wp-cli/php-cli-tools' => array(
-            'pretty_version' => 'v0.11.17',
-            'version' => '0.11.17.0',
-            'reference' => 'f6be76b7c4ee2ef93c9531b8a37bdb7ce42c3728',
+            'pretty_version' => 'v0.11.18',
+            'version' => '0.11.18.0',
+            'reference' => '0f503a790698cb36cf835e5c8d09cd4b64bf2325',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wp-cli/php-cli-tools',
             'aliases' => array(),

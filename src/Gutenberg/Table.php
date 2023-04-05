@@ -75,7 +75,7 @@ class Table {
 	/**
 	 * Register scripts.
 	 */
-	public function register_scripts(): void {
+	private function register_scripts(): void {
 		wp_register_script(
 			'ernest-gutenberg-table-editor',
 			ERNEST_PLUGIN_URL . 'assets/js/gutenberg/table/table-editor.min.js',
@@ -106,7 +106,7 @@ class Table {
 	/**
 	 * Register styles.
 	 */
-	public function register_styles(): void {
+	private function register_styles(): void {
 		wp_register_style(
 			'ernest-gutenberg-table',
 			ERNEST_PLUGIN_URL . 'assets/css/gutenberg/table/table.min.css',
