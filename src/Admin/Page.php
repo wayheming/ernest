@@ -40,7 +40,7 @@ class Page {
 	private function register_hooks(): void {
 		add_action( 'admin_menu', [ $this, 'add_admin_options_page' ] );
 		add_action( 'in_admin_header', [ $this, 'display_admin_header' ] );
-		add_action( 'wp_ajax_ernest_get_actual_table', [ $this, 'get_actual_table' ] );
+		add_action( 'wp_ajax_ernest_get_actual_table', [ $this, 'get_actual_table_action' ] );
 	}
 
 	/**
@@ -176,7 +176,7 @@ class Page {
 	/**
 	 * Update table.
 	 */
-	public function get_actual_table(): void {
+	public function get_actual_table_action(): void {
 		check_ajax_referer( 'ernest_admin_update_table_nonce', 'security' );
 
 		ob_start();

@@ -72,7 +72,7 @@ class Table extends WP_List_Table {
 	 *
 	 * @return array
 	 */
-	public function get_headers(): array {
+	private function get_headers(): array {
 		$raw_headers = $this->data['headers'];
 		$headers     = [];
 
@@ -92,5 +92,4 @@ class Table extends WP_List_Table {
 
 		return $headers;
 	}
-
 }

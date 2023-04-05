@@ -28,6 +28,11 @@ class Api {
 	 * Constructor.
 	 */
 	public function __construct() {
+		/**
+		 * Filter the transient lifetime.
+		 *
+		 * @param int $transient_lifetime The transient lifetime.
+		 */
 		$this->transient_lifetime = apply_filters( 'ernest_api_transient_lifetime', 60 * 60 );
 	}
 

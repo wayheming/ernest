@@ -31,7 +31,7 @@ gulp.task( 'js-admin', function() {
 } );
 
 gulp.task( 'js-gutenberg', function() {
-	return gulp.src( ['./assets/js/gutenberg/*.js', '!./assets/js/gutenberg/*.min.js' ] )
+	return gulp.src( ['./assets/js/gutenberg/**/*.js', '!./assets/js/gutenberg/**/*.min.js' ] )
 	.pipe(babel({
 		plugins: ['transform-react-jsx']
 	}))
@@ -44,7 +44,7 @@ gulp.task( 'js-gutenberg', function() {
 gulp.task( 'watch', function() {
 	gulp.watch( './assets/scss/admin/*.scss', gulp.series( 'sass-admin' ) );
 	gulp.watch( ['./assets/js/admin/*.js', '!./assets/js/admin/*.min.js' ], gulp.series( 'js-admin' ) );
-	gulp.watch( ['./assets/js/gutenberg/*.js', '!./assets/js/gutenberg/*.min.js' ], gulp.series( 'js-gutenberg' ) );
+	gulp.watch( ['./assets/js/gutenberg/**/*.js', '!./assets/js/gutenberg/**/*.min.js' ], gulp.series( 'js-gutenberg' ) );
 } );
 
 gulp.task( 'default', gulp.series( 'sass-admin', 'js-admin', 'js-gutenberg', 'watch' ) );

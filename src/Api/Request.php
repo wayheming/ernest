@@ -20,6 +20,11 @@ class Request {
 	public function request( string $url ): WP_Error|array {
 		$request = wp_remote_request(
 			$url,
+			/**
+			 * Filter the arguments used to make the request.
+			 *
+			 * @param array $args The arguments used to make the request.
+			 */
 			apply_filters( 'ernest_request_args',
 				[
 					'method' => 'GET',

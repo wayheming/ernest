@@ -4,7 +4,7 @@ namespace Ernest;
 
 use Ernest\Admin\Admin;
 use Ernest\Cli\Cli;
-use Ernest\Gutenberg\Gutenberg;
+use Ernest\Gutenberg\Table;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -43,7 +43,7 @@ final class Plugin {
 	public function loader(): void {
 		new Admin();
 		new Cli();
-		new Gutenberg();
+		new Table();
 	}
 }
 
