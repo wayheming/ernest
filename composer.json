@@ -1,0 +1,10 @@
+{
+	"autoload": {
+		"psr-4": {
+			"Ernest\\": "src/"
+		}
+	},
+	"require": {
+		"wp-cli/wp-cli": "^2.7"
+	}
+}

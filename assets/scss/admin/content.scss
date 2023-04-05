@@ -1,0 +1,55 @@
+.ernest-dashboard {
+  .tablenav {
+    display: none;
+  }
+
+  &__content {
+    padding: 20px;
+    transition: all .1s linear;
+
+    .wp-list-table {
+      margin-bottom: 40px;
+    }
+
+    &.ernest-loading {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  &__menu {
+    min-height: 58px;
+    background-color: #fff;
+    font-size: 14px;
+    margin: 0 0 20px 0;
+    padding: 0 20px;
+
+    &-item {
+      border-bottom: 2px solid #fff;
+      box-shadow: none;
+      display: inline-block;
+      margin-right: 30px;
+      padding: 20px 0 18px 0;
+      margin-bottom: 0;
+      transition: all .5s linear;
+
+      &.active {
+        border-bottom: 2px solid #e27730;
+      }
+
+      &:hover {
+        border-color: #999;
+      }
+    }
+
+    &-link {
+      color: #666;
+      text-decoration: none;
+
+      &:hover {
+        color: #666;
+      }
+    }
+  }
+}
+
