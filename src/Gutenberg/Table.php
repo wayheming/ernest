@@ -97,6 +97,7 @@ class Table {
 				'i18n' => [
 					'title'       => esc_html__( 'Ernest API', 'ernest' ),
 					'description' => esc_html__( 'Simple block to show API data.', 'ernest' ),
+					'loading'     => esc_html__( 'Loading...', 'ernest' ),
 				],
 			]
 		);

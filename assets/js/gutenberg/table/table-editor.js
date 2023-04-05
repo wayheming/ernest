@@ -4,7 +4,6 @@
 
 const {useEffect, useState} = wp.element;
 const {registerBlockType} = wp.blocks;
-const {serverSideRender: ServerSideRender = wp.components.ServerSideRender} = wp;
 const {ToggleControl, PanelBody, Placeholder} = wp.components;
 const {InspectorControls, useBlockProps} = wp.blockEditor || wp.editor;
 
@@ -43,14 +42,54 @@ registerBlockType( 'ernest/table', {
 			date,
 		} = attributes;
 
-		const [ tableData, setMyData ] = useState( [] );
+		const [tableData, setTableData] = useState( [] );
 
 		function fetchData() {
-			wp.ajax.post( 'ernest_get_table', {
-			} ).done( function( response ) {
-				setMyData( response );
+			wp.ajax.post( 'ernest_get_table', {} ).done( function( response ) {
+				setTableData( response );
 			} );
 		}
+
+		function MyTable( data ) {
+			const headersToInclude = {
+				'ID': id,
+				'First Name': fname,
+				'Last Name': lname,
+				'Email': email,
+				'Date': date,
+			};
+
+			const headers = data.headers.filter( header => headersToInclude[header] );
+
+			const rows = Object.keys( data.rows ).map( ( key ) => {
+				const row = data.rows[key];
+				return (
+					<tr key={key}>
+						{id && <td>{row.id}</td>}
+						{fname && <td>{row.fname}</td>}
+						{lname && <td>{row.lname}</td>}
+						{email && <td>{row.email}</td>}
+						{date && <td>{new Date( row.date * 1000 ).toLocaleString()}</td>}
+					</tr>
+				);
+			} );
+
+			const headerCells = headers.map( ( header, index ) => (
+				<th key={index}>{header}</th>
+			) );
+
+			return (
+				<div>
+					<table>
+						<thead>
+						<tr>{headerCells}</tr>
+						</thead>
+						<tbody>{rows}</tbody>
+					</table>
+				</div>
+			);
+		}
+
 
 		const toggleAttribute = ( attribute ) => ( value ) => {
 			setAttributes( {[attribute]: value} );
@@ -64,24 +103,8 @@ registerBlockType( 'ernest/table', {
 			<div className="wp-block-table">
 				<h1>Ernest API Table edit</h1>
 
-				{ tableData.length > 0 &&
-				  <table>
-					  <thead>
-					  <tr>
-						  <th>Column 1</th>
-						  <th>Column 2</th>
-					  </tr>
-					  </thead>
-					  <tbody>
-					  { tableData.map( ( row ) => (
-						  <tr key={ row.id }>
-							  <td>{ row.column1 }</td>
-							  <td>{ row.column2 }</td>
-						  </tr>
-					  ) ) }
-					  </tbody>
-				  </table>
-				}
+				{tableData.headers ? <MyTable headers={tableData.headers} rows={tableData.rows}/> :
+					<p>{ernestGutenbergTableConfig.i18n.loading}</p>}
 
 				<InspectorControls>
 					<PanelBody title="Settings">
