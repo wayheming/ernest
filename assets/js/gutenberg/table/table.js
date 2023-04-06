@@ -5,14 +5,14 @@
 		'use strict';
 
 		// Ernest admin.
-		let ernestTable = {
+		const ernestTable = {
 			// Init.
-			init: function() {
+			init() {
 				ernestTable.getTable();
 			},
 
 			// Update data button action.
-			getTable: function() {
+			getTable() {
 				$( document ).on( 'ready', () => {
 					const $tables = $( 'table.ernest' );
 
@@ -32,14 +32,17 @@
 								}
 							},
 							error: ( xhr, status, error ) => {
-								console.error( `Error: ${status} - ${error}` );
+								// eslint-disable-next-line no-console
+								console.error( `Error: ${ status } - ${ error }` );
 							},
 						} );
-					})
+					} );
 				} );
 			},
 		};
 
 		ernestTable.init();
+		// eslint-disable-next-line func-call-spacing
 	}
-)( jQuery );
+	( jQuery )
+);

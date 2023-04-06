@@ -3,7 +3,6 @@
 namespace Ernest\Gutenberg;
 
 use Ernest\Api\Api;
-use Ernest\Helpers\Notice;
 
 defined( 'ABSPATH' ) || exit;
 

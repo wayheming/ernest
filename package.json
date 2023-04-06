@@ -1,5 +1,5 @@
 {
-  "name": "Ernest",
+  "name": "ernest",
   "version": "0.0.1",
   "description": "API Based Plugin",
   "repository": "https://github.com/wayheming/ernest",
@@ -20,6 +20,7 @@
     "@babel/core": "^7.21.4",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "gulp-babel": "^8.0.0",
-    "@wordpress/eslint-plugin": "^14.3.0"
+    "@wordpress/eslint-plugin": "^14.3.0",
+    "eslint": "^8.37.0"
   }
 }

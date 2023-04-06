@@ -5,14 +5,14 @@
 		'use strict';
 
 		// Ernest admin.
-		let ernestAdmin = {
+		const ernestAdmin = {
 			// Init.
-			init: function() {
+			init() {
 				ernestAdmin.updateButtonAction();
 			},
 
 			// Update data button action.
-			updateButtonAction: function() {
+			updateButtonAction() {
 				$( document ).on( 'click', '#ernest-update-data-button', ( event ) => {
 					event.preventDefault();
 
@@ -37,7 +37,8 @@
 						error: ( xhr, status, error ) => {
 							$table.removeClass( 'ernest-loading' );
 
-							console.error( `Error: ${status} - ${error}` );
+							// eslint-disable-next-line no-console
+							console.error( `Error: ${ status } - ${ error }` );
 						},
 					} );
 				} );
@@ -45,5 +46,7 @@
 		};
 
 		ernestAdmin.init();
+		// eslint-disable-next-line func-call-spacing
 	}
-)( jQuery );
+	( jQuery )
+);
