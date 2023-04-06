@@ -15,10 +15,20 @@ class Formatter {
 	 */
 	private array $data;
 
-	public function __construct( $data ) {
+	/**
+	 * Constructor.
+	 *
+	 * @param array $data Data.
+	 */
+	public function __construct( array $data ) {
 		$this->data = $data;
 	}
 
+	/**
+	 * Get data.
+	 *
+	 * @return array
+	 */
 	public function get_data(): array {
 		$this->format_headers();
 		$this->format_date();
