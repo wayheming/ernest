@@ -8,6 +8,7 @@
  * Author URI: https://github.com/wayheming'
  * Text Domain: ernest
  * Domain Path: assets/languages
+ * Requires PHP: 8.1
  */
 
 defined( 'ABSPATH' ) || exit;
