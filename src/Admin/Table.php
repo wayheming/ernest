@@ -42,8 +42,7 @@ class Table extends WP_List_Table {
 	 */
 	public function column_default( $item, $column_name ): mixed {
 		return match ( $column_name ) {
-			'id', 'fname', 'lname', 'email' => $item[ $column_name ],
-			'date' => date( 'Y/m/d H:i:s', $item[ $column_name ] ),
+			'id', 'fname', 'lname', 'email', 'date' => $item[ $column_name ],
 			default => print_r( $item, true ),
 		};
 	}
