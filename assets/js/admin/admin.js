@@ -1,4 +1,4 @@
-/* global ernestConfig, jQuery */
+/* global ernestAdminConfig, jQuery */
 
 (
 	function( $ ) {
@@ -22,10 +22,10 @@
 
 					$.ajax( {
 						type: 'POST',
-						url: ernestConfig.adminAjaxUrl,
+						url: ernestAdminConfig.adminAjaxUrl,
 						data: {
 							action: 'ernest_get_actual_table',
-							security: ernestConfig.adminUpdateDataNonce,
+							security: ernestAdminConfig.adminUpdateDataNonce,
 						},
 						success: ( response ) => {
 							$table.removeClass( 'ernest-loading' );

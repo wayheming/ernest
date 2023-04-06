@@ -43,7 +43,6 @@ class Table {
 			'ernest/table',
 			[
 				'editor_script' => 'ernest-gutenberg-table-editor',
-				'editor_style'  => 'ernest-gutenberg-table-editor',
 				'script'        => 'ernest-gutenberg-table',
 				'style'         => 'ernest-gutenberg-table',
 				'attributes'    => [
@@ -101,6 +100,14 @@ class Table {
 				],
 			]
 		);
+
+		wp_localize_script(
+			'ernest-gutenberg-table',
+			'ernestGutenbergTableConfig',
+			[
+				'adminAjaxUrl' => admin_url( 'admin-ajax.php' ),
+			]
+		);
 	}
 
 	/**
@@ -110,13 +117,6 @@ class Table {
 		wp_register_style(
 			'ernest-gutenberg-table',
 			ERNEST_PLUGIN_URL . 'assets/css/gutenberg/table/table.min.css',
-			[],
-			ERNEST_VERSION,
-		);
-
-		wp_register_style(
-			'ernest-gutenberg-table-editor',
-			ERNEST_PLUGIN_URL . 'assets/css/gutenberg/table/table-editor.min.css',
 			[],
 			ERNEST_VERSION,
 		);
@@ -132,6 +132,60 @@ class Table {
 			wp_send_json_success( $data->get_error_message() );
 		}
 
-		wp_send_json_success( $data );
+		if ( ! isset( $_POST['attributes'] ) ) {
+			wp_send_json_success( esc_html__( 'No attributes found.', 'ernest' ) );
+		}
+
+		$sanitized_attributes = array_map( 'sanitize_text_field', $_POST['attributes'] );
+
+		wp_send_json_success( $this->display_table( $data, $sanitized_attributes ) );
+	}
+
+	/**
+	 * Display table.
+	 *
+	 * @param array $data Data.
+	 * @param array $attributes Attributes.
+	 *
+	 * @return string
+	 */
+	private function display_table( array $data, array $attributes ): string {
+		ob_start();
+
+		?>
+		<div class="wp-block-table">
+			<table>
+				<thead>
+				<tr>
+					<?php foreach ( $data['headers'] as $key => $header ) : ?>
+						<?php
+						if ( ! isset( $attributes[ $key ] ) || $attributes[ $key ] === 'false' ) {
+							continue;
+						}
+						?>
+						<th><?php echo esc_html( $header ); ?></th>
+					<?php endforeach; ?>
+				</tr
+				</thead>
+
+				<tbody>
+				<?php foreach ( $data['rows'] as $row ) : ?>
+					<tr>
+						<?php foreach ( $row as $key => $value ) : ?>
+							<?php
+							if ( ! isset( $attributes[ $key ] ) || $attributes[ $key ] === 'false' ) {
+								continue;
+							}
+							?>
+							<td><?php echo esc_html( $value ); ?></td>
+						<?php endforeach; ?>
+					</tr>
+				<?php endforeach; ?>
+				</tbody>
+			</table>
+		</div>
+		<?php
+
+		return ob_get_clean();
 	}
 }

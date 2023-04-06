@@ -21,6 +21,15 @@ gulp.task( 'sass-admin', function() {
 	.pipe( gulp.dest( './assets/css/admin' ) );
 } );
 
+gulp.task( 'sass-gutenberg', function() {
+	return gulp.src( './assets/scss/gutenberg/**/*.scss' )
+	.pipe( sass({outputStyle: 'compressed'}) )
+	.pipe(rename(function (path) {
+		path.extname = '.min.css';
+	}))
+	.pipe( gulp.dest( './assets/css/gutenberg' ) );
+} );
+
 gulp.task( 'js-admin', function() {
 	return gulp.src( ['./assets/js/admin/*.js', '!./assets/js/admin/*.min.js' ] )
 	.pipe( uglify() )
@@ -47,6 +56,6 @@ gulp.task( 'watch', function() {
 	gulp.watch( ['./assets/js/gutenberg/**/*.js', '!./assets/js/gutenberg/**/*.min.js' ], gulp.series( 'js-gutenberg' ) );
 } );
 
-gulp.task( 'default', gulp.series( 'sass-admin', 'js-admin', 'js-gutenberg', 'watch' ) );
+gulp.task( 'default', gulp.series( 'sass-admin', 'sass-gutenberg', 'js-admin', 'js-gutenberg', 'watch' ) );
 
-gulp.task( 'build', gulp.series( 'sass-admin', 'js-admin', 'pot' ) );
+gulp.task( 'build', gulp.series( 'sass-admin', 'sass-gutenberg', 'js-admin', 'js-gutenberg', 'pot' ) );

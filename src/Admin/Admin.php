@@ -44,7 +44,7 @@ class Admin {
 
 		wp_localize_script(
 			'ernest-admin-scripts',
-			'ernestConfig',
+			'ernestAdminConfig',
 			$this->get_localized_data()
 		);
 	}

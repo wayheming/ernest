@@ -45,51 +45,18 @@ registerBlockType( 'ernest/table', {
 		const [tableData, setTableData] = useState( [] );
 
 		function fetchData() {
-			wp.ajax.post( 'ernest_get_table', {} ).done( function( response ) {
+			wp.ajax.post( 'ernest_get_table', {
+				attributes: {
+					id: id,
+					fname: fname,
+					lname: lname,
+					email: email,
+					date: date,
+				},
+			} ).done( function( response ) {
 				setTableData( response );
 			} );
 		}
-
-		function MyTable( data ) {
-			const headersToInclude = {
-				'ID': id,
-				'First Name': fname,
-				'Last Name': lname,
-				'Email': email,
-				'Date': date,
-			};
-
-			const headers = data.headers.filter( header => headersToInclude[header] );
-
-			const rows = Object.keys( data.rows ).map( ( key ) => {
-				const row = data.rows[key];
-				return (
-					<tr key={key}>
-						{id && <td>{row.id}</td>}
-						{fname && <td>{row.fname}</td>}
-						{lname && <td>{row.lname}</td>}
-						{email && <td>{row.email}</td>}
-						{date && <td>{new Date( row.date * 1000 ).toLocaleString()}</td>}
-					</tr>
-				);
-			} );
-
-			const headerCells = headers.map( ( header, index ) => (
-				<th key={index}>{header}</th>
-			) );
-
-			return (
-				<div>
-					<table>
-						<thead>
-						<tr>{headerCells}</tr>
-						</thead>
-						<tbody>{rows}</tbody>
-					</table>
-				</div>
-			);
-		}
-
 
 		const toggleAttribute = ( attribute ) => ( value ) => {
 			setAttributes( {[attribute]: value} );
@@ -97,14 +64,17 @@ registerBlockType( 'ernest/table', {
 
 		useEffect( () => {
 			fetchData();
-		}, [] );
+		}, [
+			id,
+			fname,
+			lname,
+			email,
+			date,
+		] );
 
 		return (
 			<div className="wp-block-table">
-				<h1>Ernest API Table edit</h1>
-
-				{tableData.headers ? <MyTable headers={tableData.headers} rows={tableData.rows}/> :
-					<p>{ernestGutenbergTableConfig.i18n.loading}</p>}
+				{tableData.length > 0 ? <div dangerouslySetInnerHTML={{__html: tableData}}/> : <p>{ernestGutenbergTableConfig.i18n.loading}</p>}
 
 				<InspectorControls>
 					<PanelBody title="Settings">
@@ -155,16 +125,15 @@ registerBlockType( 'ernest/table', {
 
 		const dataAttributes = {
 			id: id,
-			firstName: fname,
-			lastName: lname,
+			fname: fname,
+			lname: lname,
 			email: email,
 			date: date,
 		};
 
 		return (
 			<div className="wp-block-table">
-				<h1>Ernest API Table</h1>
-				<table className="ernest" data-columns={JSON.stringify( dataAttributes )}></table>
+				<table className="ernest" data-attributes={JSON.stringify( dataAttributes )}></table>
 			</div>
 		);
 	},

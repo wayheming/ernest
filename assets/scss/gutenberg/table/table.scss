@@ -1,0 +1,18 @@
+.wp-block-table {
+  overflow-x: auto;
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  thead {
+    border-bottom: 3px solid;
+  }
+  td {
+    border: 1px solid;
+    padding: .5em;
+  }
+  th {
+    border: 1px solid;
+    padding: .5em;
+  }
+}

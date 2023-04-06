@@ -54,42 +54,16 @@ class Table extends WP_List_Table {
 	 * @return array
 	 */
 	public function get_columns(): array {
-		return $this->get_headers();
+		return $this->data['headers'];
 	}
 
 	/**
 	 * Prepare items.
 	 */
-	public function prepare_items() {
+	public function prepare_items(): void {
 		$rows = $this->data['rows'];
 
-		$this->_column_headers = [ $this->get_headers(), [], [] ];
+		$this->_column_headers = [ $this->data['headers'], [], [] ];
 		$this->items           = $rows;
-	}
-
-	/**
-	 * Get headers.
-	 *
-	 * @return array
-	 */
-	private function get_headers(): array {
-		$raw_headers = $this->data['headers'];
-		$headers     = [];
-
-		foreach ( $raw_headers as $header ) {
-			switch ( $header ) {
-				case 'First Name':
-					$headers['fname'] = $header;
-					break;
-				case 'Last Name':
-					$headers['lname'] = $header;
-					break;
-				default:
-					$headers[ strtolower( $header ) ] = $header;
-					break;
-			}
-		}
-
-		return $headers;
 	}
 }

@@ -48,15 +48,15 @@ class Api {
 			return $cached_data;
 		}
 
-		$response = $this->request( $this->url );
+		$data = $this->get_data();
 
-		if ( is_wp_error( $response ) ) {
-			return $response;
+		if ( is_wp_error( $data ) ) {
+			return $data;
 		}
 
-		set_transient( 'ernest_api_data', $response, $this->transient_lifetime );
+		set_transient( 'ernest_api_data', $data, $this->transient_lifetime );
 
-		return $response;
+		return $data;
 	}
 
 	/**
@@ -65,15 +65,30 @@ class Api {
 	 * @return WP_Error|array
 	 */
 	public function get_actual_data(): WP_Error|array {
+		$data = $this->get_data();
+
+		if ( is_wp_error( $data ) ) {
+			return $data;
+		}
+
+		set_transient( 'ernest_api_data', $data, $this->transient_lifetime );
+
+		return $data;
+	}
+
+	/**
+	 * Get data.
+	 *
+	 * @return WP_Error|array
+	 */
+	public function get_data(): WP_Error|array {
 		$response = $this->request( $this->url );
 
 		if ( is_wp_error( $response ) ) {
 			return $response;
 		}
 
-		set_transient( 'ernest_api_data', $response, $this->transient_lifetime );
-
-		return $response;
+		return ( new Formatter( $response ) )->get_data();
 	}
 
 	/**
